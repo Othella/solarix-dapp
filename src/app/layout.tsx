@@ -1,17 +1,18 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import { GatewayApiProvider } from '@/context/GatewayApiProvider';
-import { AccountProvider } from '@/context/AccountProvider';
 import dynamic from 'next/dynamic';
+import { StackedLayout } from '@/components/ui/stacked-layout';
+import MainNavbar from '@/components/MainNavbar';
+import MainSidebar from '@/components/MainSidebar';
 
 const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
+  src: "../../public/fonts/GeistVF.woff",
   variable: "--font-geist-sans",
   weight: "100 900",
 });
 const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
+  src: "../../public/fonts/GeistMonoVF.woff",
   variable: "--font-geist-mono",
   weight: "100 900",
 });
@@ -26,6 +27,12 @@ const RadixDappToolkitProvider = dynamic(
   { ssr: false }
 );
 
+const navbarItems = [
+  { url: '/', label: 'Home' },
+  { url: '/admin', label: 'Admin' },
+  { url: '/user', label: 'User' },
+];
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -37,9 +44,14 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <RadixDappToolkitProvider>
-          {children}
+          <StackedLayout
+            navbar={<MainNavbar navItems={navbarItems} />}
+            sidebar={<MainSidebar navItems={navbarItems} />}
+          >
+            {children}
+          </StackedLayout>
         </RadixDappToolkitProvider>
       </body>
-    </html>
+    </html >
   );
 }
