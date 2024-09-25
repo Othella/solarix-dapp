@@ -5,6 +5,14 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --radix-blue: #052cc0;
+  --radix-pink: #ff43ca;
+  --radix-green-1: #00ab84;
+  --radix-green-2: #00c389;
+  --radix-green-3: #21ffbe;
+  --radix-blue-1: #060f8f;
+  --radix-blue-2: #052cc0;
+  --radix-blue-3: #20e4ff;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -23,5 +31,19 @@ body {
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+}
+
+#connect-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  --radix-connect-button-width: 11.25rem;
+  --radix-connect-button-height: 2.875rem;
+  --radix-connect-button-border-radius: 0.5rem;
+}
+@media (max-width: 384px) {
+  #connect-btn {
+    --radix-connect-button-width: 100px;
   }
 }

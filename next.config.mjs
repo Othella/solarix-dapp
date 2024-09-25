@@ -7,6 +7,13 @@ const nextConfig = {
     });
     return config;
   },
+  images: {
+    remotePatterns: [
+      {
+        hostname: 'cdn.document360.io',
+      },
+    ],
+  },
 };
 
 export default nextConfig;

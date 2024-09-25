@@ -155,6 +155,10 @@ const styles = {
       'text-white [--btn-hover-overlay:theme(colors.white/10%)] [--btn-bg:theme(colors.rose.500)] [--btn-border:theme(colors.rose.600/90%)]',
       '[--btn-icon:theme(colors.rose.300)] data-[active]:[--btn-icon:theme(colors.rose.200)] data-[hover]:[--btn-icon:theme(colors.rose.200)]',
     ],
+    radix: [
+      'text-white [--btn-hover-overlay:theme(colors.white/10%)] [--btn-bg:theme(colors.radix-blue)] dark:[--btn-bg:theme(colors.radix-pink)] [--btn-border:theme(colors.radix-blue/90%)] dark:[--btn-border:theme(colors.radix-pink/90%)]',
+      '[--btn-icon:theme(colors.radix-blue)] dark:[--btn-icon:theme(colors.radix-pink)] data-[active]:[--btn-icon:theme(colors.radix-blue)] dark:data-[active]:[--btn-icon:theme(colors.radix-pink)] data-[hover]:[--btn-icon:theme(colors.radix-blue)] dark:data-[hover]:[--btn-icon:theme(colors.radix-pink)]',
+    ],
   },
 }
 
@@ -171,7 +175,7 @@ export const Button = forwardRef(function Button(
   { color, outline, plain, className, children, ...props }: ButtonProps,
   ref: React.ForwardedRef<HTMLElement>
 ) {
-  let classes = clsx(
+  const classes = clsx(
     className,
     styles.base,
     outline ? styles.outline : plain ? styles.plain : clsx(styles.solid, styles.colors[color ?? 'dark/zinc'])
