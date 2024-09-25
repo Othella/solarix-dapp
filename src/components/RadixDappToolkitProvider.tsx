@@ -6,6 +6,7 @@ import { dAppDefinitionAddress } from '@/constants';
 import { GatewayApiProvider } from '@/context/GatewayApiProvider';
 import { AccountProvider } from '@/context/AccountProvider';
 import { useState, useEffect } from 'react';
+import { RdtProvider } from '@/context/RdtProvider';
 
 export default function RadixDappToolkitProvider({ children }: { children: React.ReactNode }) {
   const [rdt, setRdt] = useState<RadixDappToolkit | null>(null);
@@ -29,10 +30,12 @@ export default function RadixDappToolkitProvider({ children }: { children: React
   }
 
   return (
-    <GatewayApiProvider value={gatewayApi}>
-      <AccountProvider>
-        {children}
-      </AccountProvider>
-    </GatewayApiProvider>
+    <RdtProvider value={rdt}>
+      <GatewayApiProvider value={gatewayApi}>
+        <AccountProvider>
+          {children}
+        </AccountProvider>
+      </GatewayApiProvider>
+    </RdtProvider>
   );
 }

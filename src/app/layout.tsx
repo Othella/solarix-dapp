@@ -6,6 +6,12 @@ import { StackedLayout } from '@/components/ui/stacked-layout';
 import MainNavbar from '@/components/MainNavbar';
 import MainSidebar from '@/components/MainSidebar';
 
+const RadixDappToolkitProvider = dynamic(
+  () => import('@/components/RadixDappToolkitProvider'),
+  { ssr: false }
+);
+
+
 const geistSans = localFont({
   src: "../../public/fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -22,10 +28,6 @@ export const metadata: Metadata = {
   description: "Solarix dApp",
 };
 
-const RadixDappToolkitProvider = dynamic(
-  () => import('@/components/RadixDappToolkitProvider'),
-  { ssr: false }
-);
 
 const navbarItems = [
   { url: '/', label: 'Home' },
@@ -38,8 +40,13 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
-    <html lang="en">
+    <html lang="en" className="text-zinc-950 antialiased lg:bg-zinc-100 dark:bg-zinc-900 dark:text-white dark:lg:bg-zinc-950">
+      <head>
+        <link rel="preconnect" href="https://rsms.me/" />
+        <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

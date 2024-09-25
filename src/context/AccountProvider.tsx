@@ -1,4 +1,5 @@
 "use client";
+
 import React, { createContext, useContext, useState, useEffect } from "react";
 import {
   DataRequestBuilder,
@@ -22,11 +23,13 @@ const AccountContext = createContext<AccountContextType>({
 
 export const useAccount = () => useContext(AccountContext);
 
+export interface AccountProviderProps {
+  children: React.ReactNode;
+}
+
 export const AccountProvider = ({
   children,
-}: {
-  children: React.ReactNode;
-}) => {
+}: AccountProviderProps) => {
   const [accounts, setAccounts] = useState<WalletDataStateAccount[]>([]);
   const [selectedAccount, setSelectedAccount] = useState<string>("");
 

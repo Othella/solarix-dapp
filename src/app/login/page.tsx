@@ -1,15 +1,12 @@
 import { Heading } from '@/components/ui/heading';
 import RadixConnectionCheck from '@/components/RadixConnectionCheck';
 import { Divider } from '@/components/ui/divider';
-export default function UserPage() {
-
+export default function LoginPage() {
   return (
-    <>
-      <Heading>User</Heading>
+    <div>
+      <Heading>First connect!</Heading>
       <Divider className="my-10 mt-6" />
-      <div className="flex flex-col gap-4">
-        <RadixConnectionCheck pageType="user" />
-      </div>
-    </ >
+      <RadixConnectionCheck />
+    </div>
   );
 }
