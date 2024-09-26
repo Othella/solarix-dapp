@@ -11,11 +11,11 @@ import { Heading } from '@/components/ui/heading';
 export default function NFTList() {
   const [nfts, setNfts] = useState<NFTResponseDTO[]>([]);
   //const getNfts = useGetNfts();
-  //const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const fetchNfts = async () => {
-    /*
     setLoading(true);
+    /*
 
     const nfts = await getNfts().finally(() => {
       setLoading(false);
@@ -35,6 +35,7 @@ export default function NFTList() {
 
     const response = await fetch('/api/panels');
     const data = await response.json();
+    setLoading(false);
 
     setNfts(data);
   };
