@@ -11,3 +11,5 @@ export async function GET() {
 
   return NextResponse.json(nfts);
 }
+
+// TODO: Implement POST to mint a new NFT

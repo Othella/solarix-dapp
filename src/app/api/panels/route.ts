@@ -20,6 +20,8 @@ export async function POST(request: Request) {
     updatedAt: new Date().toISOString(),
   };
 
+  // TODO: interact with blockchain to create panel
+
   const db = await openDb();
 
   await db.run(
@@ -34,6 +36,8 @@ export async function POST(request: Request) {
 export async function PUT(request: Request) {
   const { id, ...updatedPanel } = await request.json();
   const db = await openDb();
+
+  // TODO: interact with blockchain to update panel
 
   const result = await db.run(
     'UPDATE panels SET title = ?, address = ?, owner = ?, updatedAt = ? WHERE id = ?',
@@ -52,6 +56,8 @@ export async function DELETE(request: Request) {
   const { searchParams } = new URL(request.url);
   const id = searchParams.get('id');
   const db = await openDb();
+
+  // TODO: interact with blockchain to delete panel
 
   const result = await db.run('DELETE FROM panels WHERE id = ?', id);
   await db.close();

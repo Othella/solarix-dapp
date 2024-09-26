@@ -1,3 +1,6 @@
+// TODO use .env file
+
+
 export const componentAddress: string =
   "component_tdx_2_1cz44jlxyv0wtu2cj7vrul0eh8jpcfv3ce6ptsnat5guwrdlhfpyydn";
 
