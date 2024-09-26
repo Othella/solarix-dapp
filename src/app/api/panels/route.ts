@@ -16,8 +16,8 @@ export async function POST(request: Request) {
   const newPanel: Panel = {
     id: uuidv4(),
     ...panel,
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
+    createdAt: new Date(),
+    updatedAt: new Date(),
   };
 
   const db = await openDb();
