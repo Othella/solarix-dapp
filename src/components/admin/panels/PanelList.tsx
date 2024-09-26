@@ -7,21 +7,18 @@ import { PanelDTO } from '@/dtos/PanelDTO';
 import { PencilIcon, TrashIcon, ArrowPathIcon } from '@heroicons/react/24/solid';
 import { Heading } from '@/components/ui/heading';
 
-export default function PanelList() {
-  const [panels, setPanels] = useState<PanelDTO[]>([]);
+export default function PanelList({ panels }: { panels: PanelDTO[] }) {
+  const [panelsList, setPanelsList] = useState<PanelDTO[]>(panels);
 
   const fetchPanels = async () => {
-    //const response = await fetch('/api/panels');
-    //const data = await response.json();
-    //setPanels(data);
-
-    const panels = [{ id: "1", title: "Panel 1", address: "0x123" }, { id: "2", title: "Panel 2", address: "0x456" }, { id: "3", title: "Panel 3", address: "0x789" }];
-    setPanels(panels);
+    const response = await fetch('/api/panels');
+    const data = await response.json();
+    setPanelsList(data);
   };
 
-  const handleDelete = async (id: string) => {
+  const handleDelete = async (address: string) => {
     // TODO: Implement delete functionality here
-    console.log("Deleting panel with id", id);
+    console.log("Deleting panel with address", address);
     await fetchPanels();
   };
 
@@ -54,7 +51,7 @@ export default function PanelList() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {panels.map((panel) => (
+          {panelsList.map((panel) => (
             <TableRow key={panel.id}>
               <TableCell>{panel.title}</TableCell>
               <TableCell>{panel.address}</TableCell>

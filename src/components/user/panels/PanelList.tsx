@@ -19,7 +19,19 @@ export default function PanelList() {
 
   const fetchPanels = async () => {
     //const panels = await getNfts();
-    const panels = [{ id: "1", title: "Panel 1", address: "0x123" }, { id: "2", title: "Panel 2", address: "0x456" }, { id: "3", title: "Panel 3", address: "0x789" }];
+    const response = await fetch('/api/panels');
+    const data = await response.json();
+
+    // Remove a random panel from the data
+    if (data.length > 0) {
+      const randomIndex = Math.floor(Math.random() * data.length);
+      data.splice(randomIndex, 1);
+    }
+
+    const panels = data.map((panel: PanelDTO) => ({
+      address: panel.address
+    }));
+
     setPanels(panels);
   };
 

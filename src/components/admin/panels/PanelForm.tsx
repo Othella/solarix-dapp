@@ -41,6 +41,7 @@ export default function PanelForm() {
           onChange={(e) => setTitle(e.target.value)}
           placeholder="Panel Title"
           className="mb-4"
+          required
         />
         <Input
           type="text"
@@ -48,6 +49,7 @@ export default function PanelForm() {
           onChange={(e) => setAddress(e.target.value)}
           placeholder="Panel Address"
           className="mb-4"
+          required
         />
         <Button type="submit" color='radix'>Add Panel</Button>
       </form>

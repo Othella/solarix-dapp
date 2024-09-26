@@ -10,6 +10,7 @@ import RadixConnectionCheck from '@/components/RadixConnectionCheck';
 import { Button } from '@/components/ui/button';
 
 export default function AdminPage() {
+
   return (
     <>
       <div className="max-lg:hidden flex items-center gap-2">

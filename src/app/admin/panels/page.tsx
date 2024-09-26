@@ -1,3 +1,7 @@
+"use client"
+
+import { useState, useEffect } from 'react';
+import { PanelDTO } from '@/dtos/PanelDTO';
 import { Heading } from '@/components/ui/heading';
 import { Divider } from '@/components/ui/divider';
 import PanelList from '@/components/admin/panels/PanelList';
@@ -9,6 +13,17 @@ import { Subheading } from '@/components/ui/heading';
 import { Button } from '@/components/ui/button';
 
 export default function PanelsPage() {
+  const [panels, setPanels] = useState<PanelDTO[]>([]);
+
+  const fetchPanels = async () => {
+    const response = await fetch('/api/panels');
+    const data = await response.json();
+    setPanels(data);
+  };
+
+  useEffect(() => {
+    fetchPanels();
+  }, [panels]);
   return (
     <>
       <div className="max-lg:hidden flex items-center gap-2">
@@ -33,7 +48,7 @@ export default function PanelsPage() {
         <Divider className="my-10 mt-6" />
         <PanelForm />
         <Divider className="my-10 mt-6" />
-        <PanelList />
+        <PanelList panels={panels} />
         <Divider className="my-10 mt-6" />
         <Button outline href="/admin"><ArrowLeftIcon className="size-4" /> Back to Admin</Button>
       </div>
