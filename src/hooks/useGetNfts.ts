@@ -27,6 +27,11 @@ export const useGetNfts = () => {
     const nfts = accountDetails?.non_fungible_resources?.items;
     console.log("Account NFTs", nfts);
 
+    // TODO Filter out the nfts that are not panels
+    // const panels = nfts?.filter((nft: any) => nft.metadata.panel);
+    // console.log("Account Panels", panels);
+    // return panels;
+
     return nfts;
 
   }, [radixDappToolkit, gatewayApi, getWallet]);

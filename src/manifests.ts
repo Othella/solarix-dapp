@@ -1,11 +1,13 @@
-export const buyNftManifest = `
+import { componentAddress, adminBadgeAddress } from './constants';
+
+export const buyNftManifest = (nftAddress: string, buyerAddress: string) => `
     CALL_METHOD
         Address("component_sim1cptxxxxxxxxxfaucetxxxxxxxxx000527798379xxxxxxxxxhkrefh")
         "lock_fee"
         Decimal("5000")
     ;
     CALL_METHOD
-        Address("account_sim1c83r6qw6jsqq2dw37l0uhf0ndp87qw27t6x8p53k0h3e2v2ea2mekw")
+        Address("${adminBadgeAddress}")
         "withdraw"
         Address("resource_sim1tknxxxxxxxxxradxrdxxxxxxxxx009923554798xxxxxxxxxakj8n3")
         Decimal("6000")
@@ -16,14 +18,14 @@ export const buyNftManifest = `
         Bucket("bucket1")
     ;
     CALL_METHOD
-        Address("component_sim1cr4y0gjxcsj5kukswz0w0zqq653mhr8232yahwyc4q29p27sppwk9t")
+        Address("${componentAddress}")
         "buy_nft"
         0u64
         10u32
         Bucket("bucket1")
     ;
     CALL_METHOD
-        Address("account_sim1c83r6qw6jsqq2dw37l0uhf0ndp87qw27t6x8p53k0h3e2v2ea2mekw")
+        Address("${buyerAddress}")
         "try_deposit_batch_or_refund"
         Expression("ENTIRE_WORKTOP")
         Enum<0u8>()

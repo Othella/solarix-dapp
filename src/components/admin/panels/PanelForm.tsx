@@ -9,20 +9,25 @@ import { Heading } from '@/components/ui/heading';
 export default function PanelForm() {
   const [title, setTitle] = useState('');
   const [address, setAddress] = useState('');
-  const [owner, setOwner] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const newPanel: CreatePanelDTO = { title, address, owner };
-    await fetch('/api/panels', {
+    const newPanel: CreatePanelDTO = { title, address };
+    // TODO: interact with blockchain to create panel
+    const response = await fetch('/api/panels', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify(newPanel),
     });
+    const data = await response.json();
+    console.log(data);
+
     setTitle('');
     setAddress('');
-    setOwner('');
     // Trigger a refresh of the PanelList
+
     // You might want to lift this state up or use a state management solution
   };
 
@@ -42,13 +47,6 @@ export default function PanelForm() {
           value={address}
           onChange={(e) => setAddress(e.target.value)}
           placeholder="Panel Address"
-          className="mb-4"
-        />
-        <Input
-          type="text"
-          value={owner}
-          onChange={(e) => setOwner(e.target.value)}
-          placeholder="Panel Owner"
           className="mb-4"
         />
         <Button type="submit" color='radix'>Add Panel</Button>

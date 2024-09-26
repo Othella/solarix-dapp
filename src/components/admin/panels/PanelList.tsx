@@ -3,26 +3,30 @@
 import { useState, useEffect } from 'react';
 import { Table, TableHeader, TableBody, TableRow, TableCell, TableHead } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
-import { PanelResponseDTO } from '@/dtos/PanelDTO';
+import { PanelDTO } from '@/dtos/PanelDTO';
 import { PencilIcon, TrashIcon, ArrowPathIcon } from '@heroicons/react/24/solid';
 import { Heading } from '@/components/ui/heading';
 
 export default function PanelList() {
-  const [panels, setPanels] = useState<PanelResponseDTO[]>([]);
+  const [panels, setPanels] = useState<PanelDTO[]>([]);
 
   const fetchPanels = async () => {
-    const response = await fetch('/api/panels');
-    const data = await response.json();
-    setPanels(data);
+    //const response = await fetch('/api/panels');
+    //const data = await response.json();
+    //setPanels(data);
+
+    const panels = [{ id: "1", title: "Panel 1", address: "0x123" }, { id: "2", title: "Panel 2", address: "0x456" }, { id: "3", title: "Panel 3", address: "0x789" }];
+    setPanels(panels);
   };
 
   const handleDelete = async (id: string) => {
-    await fetch(`/api/panels?id=${id}`, { method: 'DELETE' });
+    // TODO: Implement delete functionality here
+    console.log("Deleting panel with id", id);
     await fetchPanels();
   };
 
-  const handleEdit = async (id: string) => {
-    const panel = panels.find(panel => panel.id === id);
+  const handleEdit = async (address: string) => {
+    const panel = panels.find(panel => panel.address === address);
     console.log("Panel to edit", panel);
     // TODO: Implement edit functionality here
   };
@@ -56,8 +60,8 @@ export default function PanelList() {
               <TableCell>{panel.address}</TableCell>
               <TableCell>
                 <div className="flex gap-2">
-                  <Button onClick={() => handleEdit(panel.id)} color="blue"><PencilIcon className="size-4" /> Edit</Button>
-                  <Button onClick={() => handleDelete(panel.id)} color="red"><TrashIcon className="size-4" /> Delete</Button>
+                  <Button onClick={() => handleEdit(panel.address)} color="blue"><PencilIcon className="size-4" /> Edit</Button>
+                  <Button onClick={() => handleDelete(panel.address)} color="red"><TrashIcon className="size-4" /> Delete</Button>
                 </div>
               </TableCell>
             </TableRow>

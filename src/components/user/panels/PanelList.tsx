@@ -3,35 +3,61 @@
 import { useState, useEffect } from 'react';
 import { Table, TableHeader, TableBody, TableRow, TableCell, TableHead } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
-import { PanelResponseDTO } from '@/dtos/PanelDTO';
+import { PanelDTO } from '@/dtos/PanelDTO';
 import { Heading } from '@/components/ui/heading';
 import { ArrowPathIcon, PercentBadgeIcon, CreditCardIcon, EyeIcon } from '@heroicons/react/20/solid';
+//import { useGetNfts } from '@/hooks/useGetNfts';
+import { useSendTransaction } from '@/hooks/useSendTransaction';
+import { buyNftManifest, claimEarningsManifest } from '@/manifests';
+import { useGetWallet } from '@/hooks/useGetWallet';
 
 export default function PanelList() {
-  const [panels, setPanels] = useState<PanelResponseDTO[]>([]);
+  const [panels, setPanels] = useState<PanelDTO[]>([]);
+  //const getNfts = useGetNfts();
+  const sendTransaction = useSendTransaction();
+  const getWallet = useGetWallet();
 
   const fetchPanels = async () => {
-    const response = await fetch('/api/panels');
-    const data = await response.json();
-    setPanels(data);
+    //const panels = await getNfts();
+    const panels = [{ id: "1", title: "Panel 1", address: "0x123" }, { id: "2", title: "Panel 2", address: "0x456" }, { id: "3", title: "Panel 3", address: "0x789" }];
+    setPanels(panels);
   };
 
-  const purchasePanel = async (id: string) => {
-    const response = await fetch(`/api/panels/purchase?id=${id}`, { method: 'POST' });
-    const data = await response.json();
-    console.log(data);
+  const purchasePanel = async (panelAddress: string) => {
+    const wallet = await getWallet();
+    if (!wallet) {
+      console.error("Wallet not connected");
+      return;
+    }
+    const walletAddress = wallet.accounts[0].address;
+
+    console.log("Buying panel NFT with address", panelAddress, "from wallet", walletAddress);
+
+    // "TODO: Purchase panel using buy_nft manifest";
+    const manifest = buyNftManifest(panelAddress, walletAddress);
+    const result = await sendTransaction(manifest);
+    console.log(result);
   };
 
-  const claimRewards = async (id: string) => {
-    const response = await fetch(`/api/panels/rewards?id=${id}`, { method: 'POST' });
-    const data = await response.json();
-    console.log(data);
+  const claimRewards = async (panelAddress: string) => {
+    const wallet = await getWallet();
+    if (!wallet) {
+      console.error("Wallet not connected");
+      return;
+    }
+    const walletAddress = wallet.accounts[0].address;
+
+    console.log("Claiming rewards for panel", panelAddress, "with wallet", walletAddress);
+
+    // "TODO: Purchase panel using buy_nft manifest";
+    const manifest = claimEarningsManifest;
+    const result = await sendTransaction(manifest);
+    console.log(result);
   };
 
-  const getHistory = async (id: string) => {
-    const response = await fetch(`/api/panels/history?id=${id}`, { method: 'GET' });
-    const data = await response.json();
-    console.log(data);
+  const getHistory = async (address: string) => {
+    // "TODO: get ressource transactions history from radix explorer
+    console.log("Getting history for panel", address);
   };
 
   const handleRefresh = async () => {

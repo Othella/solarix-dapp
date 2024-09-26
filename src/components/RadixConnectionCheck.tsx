@@ -51,6 +51,16 @@ const RadixConnectionCheck: React.FC<RadixConnectionCheckProps> = ({ pageType })
     return null;
   }
 
+  if (pageType === 'admin') {
+    if (!isCurrentUserAdmin) {
+      return (
+        <>
+          <Text>TODO: Ensure user is admin</Text>
+        </>
+      );
+    }
+  }
+
   return (
     <div>
       <Text>Please connect to Radix to continue on {pageType} page</Text>

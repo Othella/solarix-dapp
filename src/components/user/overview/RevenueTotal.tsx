@@ -7,13 +7,9 @@ const RevenueTotal: React.FC = () => {
 
   useEffect(() => {
     const fetchRevenueTotal = async () => {
-      try {
-        const response = await fetch('/api/revenue/total');
-        const data = await response.json();
-        setTotal(data.total);
-      } catch (error) {
-        console.error('Error fetching revenue total:', error);
-      }
+      // TODO: Fetch revenue total from API
+      const revenue = 100;
+      setTotal(revenue);
     };
 
     fetchRevenueTotal();

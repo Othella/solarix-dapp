@@ -25,8 +25,8 @@ export async function POST(request: Request) {
   const db = await openDb();
 
   await db.run(
-    'INSERT INTO panels (id, title, address, owner, createdAt, updatedAt) VALUES (?, ?, ?, ?, ?, ?)',
-    [newPanel.id, newPanel.title, newPanel.address, newPanel.owner, newPanel.createdAt, newPanel.updatedAt]
+    'INSERT INTO panels (id, title, address, createdAt, updatedAt) VALUES (?, ?, ?, ?, ?)',
+    [newPanel.id, newPanel.title, newPanel.address, newPanel.createdAt, newPanel.updatedAt]
   );
   await db.close();
 
@@ -40,8 +40,8 @@ export async function PUT(request: Request) {
   // TODO: interact with blockchain to update panel
 
   const result = await db.run(
-    'UPDATE panels SET title = ?, address = ?, owner = ?, updatedAt = ? WHERE id = ?',
-    [updatedPanel.title, updatedPanel.address, updatedPanel.owner, new Date().toISOString(), id]
+    'UPDATE panels SET title = ?, address = ?, updatedAt = ? WHERE id = ?',
+    [updatedPanel.title, updatedPanel.address, new Date().toISOString(), id]
   );
   await db.close();
 
