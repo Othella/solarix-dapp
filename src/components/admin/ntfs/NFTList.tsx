@@ -6,14 +6,39 @@ import { Button } from '@/components/ui/button';
 import { NFTResponseDTO } from '@/dtos/NftDTO';
 import { ArrowPathIcon } from '@heroicons/react/24/solid';
 import { Heading } from '@/components/ui/heading';
-
+import { useGetWallet } from "@/hooks/useGetWallet";
 export default function NFTList() {
   const [nfts, setNfts] = useState<NFTResponseDTO[]>([]);
-
+  const getWallet = useGetWallet();
+  const [loading, setLoading] = useState(false);
   const fetchNfts = async () => {
-    const response = await fetch('/api/nfts');
-    const data = await response.json();
-    setNfts(data);
+    setLoading(true);
+
+    const wallet = await getWallet().finally(() => {
+      setLoading(false);
+    });
+    console.log(wallet);
+
+    if (!wallet) {
+      return;
+    }
+
+    // TODO: get nfts from the wallet
+    const nfts = wallet.accounts.map((account) => (
+      console.log(account),
+      {
+        address: '0x0000000',
+        owner: '0x0000000',
+        panelId: '12345',
+        id: '12345',
+        tokenId: 'XRD',
+        createdAt: '2024-01-01',
+        updatedAt: '2024-01-01',
+      }));
+
+    console.log(nfts);
+
+    setNfts(nfts);
   };
 
   const handleRefresh = async () => {
@@ -30,7 +55,7 @@ export default function NFTList() {
         <Heading className="mb-4">All NFTs</Heading>
         <Button onClick={handleRefresh}><ArrowPathIcon className="size-4" /> Refresh NFTs</Button>
       </div>
-      <Table className="w-full">
+      {loading ? <div>Loading...</div> : <Table className="w-full">
         <TableHead>
           <TableRow>
             <TableHeader>Panel</TableHeader>
@@ -48,6 +73,7 @@ export default function NFTList() {
           ))}
         </TableBody>
       </Table>
+      }
     </>
   );
 }
