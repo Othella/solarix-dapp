@@ -6,39 +6,31 @@ import { Button } from '@/components/ui/button';
 import { NFTResponseDTO } from '@/dtos/NftDTO';
 import { ArrowPathIcon } from '@heroicons/react/24/solid';
 import { Heading } from '@/components/ui/heading';
-import { useGetWallet } from "@/hooks/useGetWallet";
+import { useGetNfts } from "@/hooks/useGetNfts";
+
 export default function NFTList() {
   const [nfts, setNfts] = useState<NFTResponseDTO[]>([]);
-  const getWallet = useGetWallet();
+  const getNfts = useGetNfts();
   const [loading, setLoading] = useState(false);
+
   const fetchNfts = async () => {
     setLoading(true);
 
-    const wallet = await getWallet().finally(() => {
+    const nfts = await getNfts().finally(() => {
       setLoading(false);
     });
-    console.log(wallet);
 
-    if (!wallet) {
+    console.log("Fetched NFTs for admin", nfts);
+
+    if (!nfts) {
       return;
     }
 
-    // TODO: get nfts from the wallet
-    const nfts = wallet.accounts.map((account) => (
-      console.log(account),
-      {
-        address: '0x0000000',
-        owner: '0x0000000',
-        panelId: '12345',
-        id: '12345',
-        tokenId: 'XRD',
-        createdAt: '2024-01-01',
-        updatedAt: '2024-01-01',
-      }));
+    const nftsList = nfts.map((nft) => ({
+      address: nft.resource_address
+    }));
 
-    console.log(nfts);
-
-    setNfts(nfts);
+    setNfts(nftsList);
   };
 
   const handleRefresh = async () => {
@@ -47,6 +39,7 @@ export default function NFTList() {
 
   useEffect(() => {
     fetchNfts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -58,17 +51,13 @@ export default function NFTList() {
       {loading ? <div>Loading...</div> : <Table className="w-full">
         <TableHead>
           <TableRow>
-            <TableHeader>Panel</TableHeader>
             <TableHeader>Address</TableHeader>
-            <TableHeader>Owner</TableHeader>
           </TableRow>
         </TableHead>
         <TableBody>
           {nfts.map((nft) => (
-            <TableRow key={nft.id}>
-              <TableCell>{nft.panelId}</TableCell>
+            <TableRow key={nft.address}>
               <TableCell>{nft.address}</TableCell>
-              <TableCell>{nft.owner}</TableCell>
             </TableRow>
           ))}
         </TableBody>

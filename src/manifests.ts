@@ -1,6 +1,3 @@
-import { adminBadgeAddress, instantiatedComponentAddress } from "@/constants";
-
-
 export const buyNftManifest = `
     CALL_METHOD
         Address("component_sim1cptxxxxxxxxxfaucetxxxxxxxxx000527798379xxxxxxxxxhkrefh")

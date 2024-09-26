@@ -47,6 +47,7 @@ export default function NFTList() {
 
   useEffect(() => {
     fetchNfts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -58,17 +59,17 @@ export default function NFTList() {
       {loading ? <div>Loading...</div> : <Table className="w-full">
         <TableHead>
           <TableRow>
-            <TableHeader>Panel</TableHeader>
             <TableHeader>Address</TableHeader>
-            <TableHeader>Owner</TableHeader>
+            <TableHeader>Actions</TableHeader>
           </TableRow>
         </TableHead>
         <TableBody>
           {nfts.map((nft) => (
-            <TableRow key={nft.id}>
-              <TableCell>{nft.panelId}</TableCell>
+            <TableRow key={nft.address}>
               <TableCell>{nft.address}</TableCell>
-              <TableCell>{nft.owner}</TableCell>
+              <TableCell>
+                <Button>Claim</Button>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

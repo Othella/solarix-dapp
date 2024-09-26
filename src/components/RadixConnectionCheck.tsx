@@ -5,6 +5,7 @@ import { Text } from '@/components/ui/text';
 import { setCookie, deleteCookie } from '@/utils/cookies';
 import { DataRequestBuilder, WalletDataStateAccount, Persona } from '@radixdlt/radix-dapp-toolkit';
 import { useRadixDappToolkit } from "@/hooks/useRadixDappToolkit";
+import { useIsAdmin } from "@/hooks/useIsAdmin";
 
 interface RadixConnectionCheckProps {
   pageType?: 'admin' | 'user';
@@ -16,6 +17,7 @@ const RadixConnectionCheck: React.FC<RadixConnectionCheckProps> = ({ pageType })
   const [persona, setPersona] = useState<Persona | null>(null);
 
   const rdt = useRadixDappToolkit();
+  const isCurrentUserAdmin = useIsAdmin();
 
   useEffect(() => {
     rdt?.walletApi.setRequestData(DataRequestBuilder.accounts().atLeast(1));
@@ -39,9 +41,11 @@ const RadixConnectionCheck: React.FC<RadixConnectionCheckProps> = ({ pageType })
       deleteCookie('radix_connected'); // Set cookie for 7 days
     }
 
+    console.log('isCurrentUserAdmin', isCurrentUserAdmin);
+
     return () => subscription?.unsubscribe();
 
-  }, [rdt, persona, accounts, isConnected]);
+  }, [rdt, persona, accounts, isConnected, isCurrentUserAdmin]);
 
   if (isConnected) {
     return null;
