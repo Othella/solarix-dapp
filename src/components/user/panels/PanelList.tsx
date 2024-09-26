@@ -70,6 +70,7 @@ export default function PanelList() {
   const getHistory = async (address: string) => {
     // "TODO: get ressource transactions history from radix explorer
     console.log("Getting history for panel", address);
+    window.open(`https://stokenet-dashboard.radixdlt.com/resource/${address}`, '_blank');
   };
 
   const handleRefresh = async () => {
