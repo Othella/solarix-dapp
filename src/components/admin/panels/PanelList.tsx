@@ -5,6 +5,8 @@ import { Table, TableHeader, TableBody, TableRow, TableCell, TableHead } from '@
 import { Button } from '@/components/ui/button';
 import { PanelResponseDTO } from '@/dtos/PanelDTO';
 import { PencilIcon, TrashIcon, ArrowPathIcon } from '@heroicons/react/24/solid';
+import { Heading } from '@/components/ui/heading';
+
 export default function PanelList() {
   const [panels, setPanels] = useState<PanelResponseDTO[]>([]);
 
@@ -35,7 +37,10 @@ export default function PanelList() {
 
   return (
     <>
-      <Button onClick={handleRefresh}><ArrowPathIcon className="size-4" /> Refresh Panels</Button>
+      <div className="flex justify-between items-center">
+        <Heading className="mb-4">All Panels</Heading>
+        <Button onClick={handleRefresh}><ArrowPathIcon className="size-4" /> Refresh Panels</Button>
+      </div>
       <Table className="w-full">
         <TableHead>
           <TableRow>

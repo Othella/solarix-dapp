@@ -12,7 +12,7 @@ export default function Home() {
           <Heading className="text-6xl md:text-3xl lg:text-4xl xl:text-6xl">Welcome to the <span className="text-radix-blue dark:text-radix-pink">Solarix</span> dApp</Heading>
           <BoltIcon className="w-12 h-12 ml-2 text-radix-blue dark:text-radix-pink" />
         </div>
-        <div className="flex gap-4 items-center flex-col sm:flex-row justify-center align-middle flex-grow w-full mt-2">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
           <Button href="/admin" color={'radix'} className="w-full sm:w-auto flex-grow lg:p-2">Open Admin</Button>
           <Button href="/user" color={'radix'} className="w-full sm:w-auto flex-grow lg:p-2">Open User</Button>
         </div>

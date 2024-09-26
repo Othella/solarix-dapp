@@ -5,3 +5,5 @@ export const componentAddress =
 // then use that account for your dAppDefinitionAddress
 export const dAppDefinitionAddress =
   "account_tdx_2_12y7ue9sslrkpywpgqyu3nj8cut0uu5arpr7qyalz7y9j7j5q4ayhv6";
+
+export const dbFile = './solarix.sqlite';
