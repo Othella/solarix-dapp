@@ -6,14 +6,15 @@ import { Button } from '@/components/ui/button';
 import { NFTResponseDTO } from '@/dtos/NftDTO';
 import { ArrowPathIcon } from '@heroicons/react/24/solid';
 import { Heading } from '@/components/ui/heading';
-import { useGetNfts } from "@/hooks/useGetNfts";
+//import { useGetNfts } from "@/hooks/useGetNfts";
 
 export default function NFTList() {
   const [nfts, setNfts] = useState<NFTResponseDTO[]>([]);
-  const getNfts = useGetNfts();
-  const [loading, setLoading] = useState(false);
+  //const getNfts = useGetNfts();
+  //const [loading, setLoading] = useState(false);
 
   const fetchNfts = async () => {
+    /*
     setLoading(true);
 
     const nfts = await getNfts().finally(() => {
@@ -29,8 +30,13 @@ export default function NFTList() {
     const nftsList = nfts.map((nft) => ({
       address: nft.resource_address
     }));
-
     setNfts(nftsList);
+*/
+
+    const response = await fetch('/api/panels');
+    const data = await response.json();
+
+    setNfts(data);
   };
 
   const handleRefresh = async () => {
