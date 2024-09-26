@@ -4,10 +4,9 @@ import PanelList from '@/components/admin/panels/PanelList';
 import PanelForm from '@/components/admin/panels/PanelForm';
 import { Link } from '@/components/ui/link';
 import { Text } from '@/components/ui/text';
-import { HomeIcon } from '@heroicons/react/24/solid';
+import { HomeIcon, ArrowLeftIcon } from '@heroicons/react/20/solid';
 import { Subheading } from '@/components/ui/heading';
 import { Button } from '@/components/ui/button';
-import { ArrowLeftIcon } from '@heroicons/react/24/solid';
 
 export default function PanelsPage() {
   return (

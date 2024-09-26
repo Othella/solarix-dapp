@@ -3,7 +3,7 @@ import RadixConnectionCheck from '@/components/RadixConnectionCheck';
 import { Divider } from '@/components/ui/divider';
 import { Link } from '@/components/ui/link';
 import { Text } from '@/components/ui/text';
-import { HomeIcon } from '@heroicons/react/24/solid';
+import { HomeIcon } from '@heroicons/react/20/solid';
 import { Button } from '@/components/ui/button';
 import UserOverviewCard from '@/components/user/UserOverviewCard';
 import PanelCount from '@/components/user/overview/PanelCount';
@@ -27,14 +27,13 @@ export default function UserPage() {
         <Heading>My Account Overview</Heading>
         <Divider className="my-6" />
         <RadixConnectionCheck pageType="user" />
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <Button href="/user/panels">Manage Panels</Button>
-          <Button href="/user/nfts">Manage NFTs</Button>
-          <Button href="/user/revenue">Manage Revenue</Button>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <Button href="/user/panels">My Panels</Button>
+          <Button href="/user/revenue">My Revenue</Button>
         </div>
 
         <Divider className="my-6" />
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <UserOverviewCard title="Total Panels" value={<PanelCount />} />
           <UserOverviewCard title="Generated Revenue" value={<RevenueTotal />} />
         </div>

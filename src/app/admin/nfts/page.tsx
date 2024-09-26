@@ -1,11 +1,10 @@
 import { Link } from '@/components/ui/link';
 import { Text } from '@/components/ui/text';
-import { HomeIcon } from '@heroicons/react/24/solid';
+import { HomeIcon, ArrowLeftIcon } from '@heroicons/react/20/solid';
 import { Heading } from '@/components/ui/heading';
 import { Divider } from '@/components/ui/divider';
 import NFTList from '@/components/admin/ntfs/NFTList';
 import { Button } from '@/components/ui/button';
-import { ArrowLeftIcon } from '@heroicons/react/24/solid';
 
 export default function NftsPage() {
   return (
@@ -14,6 +13,10 @@ export default function NftsPage() {
         <Link href="/" className="inline-flex items-center gap-2 text-sm/6">
           <HomeIcon className="size-4" />
           Home
+        </Link>
+        <span className="mx-1">/</span>
+        <Link href="/admin" className="inline-flex items-center gap-2 text-sm/6 text-zinc-500 dark:text-zinc-400">
+          Admin
         </Link>
         <span className="mx-1">/</span>
         <Text className="inline-flex items-center gap-2 text-sm/6 text-zinc-500 dark:text-zinc-400">

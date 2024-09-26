@@ -3,10 +3,9 @@ import { Divider } from '@/components/ui/divider';
 import PanelList from '@/components/user/panels/PanelList';
 import { Link } from '@/components/ui/link';
 import { Text } from '@/components/ui/text';
-import { HomeIcon } from '@heroicons/react/24/solid';
+import { HomeIcon, ArrowLeftIcon } from '@heroicons/react/20/solid';
 import { Subheading } from '@/components/ui/heading';
 import { Button } from '@/components/ui/button';
-import { ArrowLeftIcon } from '@heroicons/react/24/solid';
 
 export default function PanelsPage() {
   return (

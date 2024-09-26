@@ -1,7 +1,6 @@
 import { useCallback } from "react";
 import { useRadixDappToolkit } from "./useRadixDappToolkit";
 import { useGatewayApi } from "./useGatewayApi";
-import { adminBadgeAddress } from "../constants";
 
 export const useGetWallet = () => {
   const radixDappToolkit = useRadixDappToolkit();
@@ -11,15 +10,7 @@ export const useGetWallet = () => {
     if (!radixDappToolkit || !gatewayApi) return;
 
     const wallet = await radixDappToolkit.walletApi.getWalletData();
-
-    // get panels from the wallet
-    console.log("Wallet", wallet);
-
-    const nftsIds = await gatewayApi.state.getAllNonFungibleIds(adminBadgeAddress);
-    console.log("NFTs IDs", nftsIds);
-
-    const nfts = await gatewayApi.state.getNonFungibleData(adminBadgeAddress, nftsIds);
-    console.log("NFTs", nfts);
+    console.log("Connected Wallet", wallet);
 
     return wallet;
   }, [radixDappToolkit, gatewayApi]);

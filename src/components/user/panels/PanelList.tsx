@@ -4,8 +4,8 @@ import { useState, useEffect } from 'react';
 import { Table, TableHeader, TableBody, TableRow, TableCell, TableHead } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
 import { PanelResponseDTO } from '@/dtos/PanelDTO';
-import { PencilIcon, TrashIcon, ArrowPathIcon } from '@heroicons/react/24/solid';
 import { Heading } from '@/components/ui/heading';
+import { ArrowPathIcon, PercentBadgeIcon, CreditCardIcon, EyeIcon } from '@heroicons/react/20/solid';
 
 export default function PanelList() {
   const [panels, setPanels] = useState<PanelResponseDTO[]>([]);
@@ -16,15 +16,22 @@ export default function PanelList() {
     setPanels(data);
   };
 
-  const handleDelete = async (id: string) => {
-    await fetch(`/api/panels?id=${id}`, { method: 'DELETE' });
-    await fetchPanels();
+  const purchasePanel = async (id: string) => {
+    const response = await fetch(`/api/panels/purchase?id=${id}`, { method: 'POST' });
+    const data = await response.json();
+    console.log(data);
   };
 
-  const handleEdit = async (id: string) => {
-    const panel = panels.find(panel => panel.id === id);
-    console.log("Panel to edit", panel);
-    // TODO: Implement edit functionality here
+  const claimRewards = async (id: string) => {
+    const response = await fetch(`/api/panels/rewards?id=${id}`, { method: 'POST' });
+    const data = await response.json();
+    console.log(data);
+  };
+
+  const getHistory = async (id: string) => {
+    const response = await fetch(`/api/panels/history?id=${id}`, { method: 'GET' });
+    const data = await response.json();
+    console.log(data);
   };
 
   const handleRefresh = async () => {
@@ -44,20 +51,19 @@ export default function PanelList() {
       <Table className="w-full">
         <TableHead>
           <TableRow>
-            <TableHeader>Title</TableHeader>
             <TableHeader>Address</TableHeader>
             <TableHeader>Actions</TableHeader>
           </TableRow>
         </TableHead>
         <TableBody>
           {panels.map((panel) => (
-            <TableRow key={panel.id}>
-              <TableCell>{panel.title}</TableCell>
+            <TableRow key={panel.address}>
               <TableCell>{panel.address}</TableCell>
               <TableCell>
                 <div className="flex gap-2">
-                  <Button onClick={() => handleEdit(panel.id)} color="blue"><PencilIcon className="size-4" /> Edit</Button>
-                  <Button onClick={() => handleDelete(panel.id)} color="red"><TrashIcon className="size-4" /> Delete</Button>
+                  <Button onClick={() => purchasePanel(panel.address)} color="blue"><CreditCardIcon className="size-4" /> Purchase</Button>
+                  <Button onClick={() => claimRewards(panel.address)} color="red"><PercentBadgeIcon className="size-4" /> Claim Rewards</Button>
+                  <Button onClick={() => getHistory(panel.address)} color="green"><EyeIcon className="size-4" /> View History</Button>
                 </div>
               </TableCell>
             </TableRow>
