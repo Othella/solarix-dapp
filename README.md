@@ -6,16 +6,20 @@
 - `pnpm` 9.x (recommended) or `yarn` or `npm` or `bun`
 - Solarix backend
 
-## Install dependencies
+## Install
 
 ```bash
 pnpm install
+pnpm run init-db
 # or
 yarn install
+yarn run init-db
 # or
 npm install
+npm run init-db
 # or
 bun install
+bun run init-db
 ```
 
 ## Run
